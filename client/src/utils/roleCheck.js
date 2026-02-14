@@ -1,19 +1,31 @@
+// Frontend-only role checking utilities
+// Note: These functions check localStorage directly for compatibility
+// Consider using useAuth hook in React components instead
+
 export const checkRole = (allowedRoles) => {
-  const userRole = localStorage.getItem("role");
-  return allowedRoles.includes(userRole);
+  const userData = localStorage.getItem("user");
+  if (!userData) return false;
+  const user = JSON.parse(userData);
+  return allowedRoles.includes(user.role);
 };
 
 export const isClient = () => {
-  const userRole = localStorage.getItem("role");
-  return userRole === "client";
+  const userData = localStorage.getItem("user");
+  if (!userData) return false;
+  const user = JSON.parse(userData);
+  return user.role === "client";
 };
 
 export const isFreelancer = () => {
-  const userRole = localStorage.getItem("role");
-  return userRole === "freelancer";
+  const userData = localStorage.getItem("user");
+  if (!userData) return false;
+  const user = JSON.parse(userData);
+  return user.role === "freelancer";
 };
 
 export const isAdmin = () => {
-  const userRole = localStorage.getItem("role");
-  return userRole === "admin";
+  const userData = localStorage.getItem("user");
+  if (!userData) return false;
+  const user = JSON.parse(userData);
+  return user.role === "admin";
 };

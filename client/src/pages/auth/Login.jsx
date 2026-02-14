@@ -1,15 +1,27 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add login logic here
+    // Frontend-only login (no backend API)
+    // In a real app, you would validate against a backend
+    const mockUser = {
+      email: email,
+      name: email.split("@")[0],
+      role: "client", // Default role, can be changed based on mockData
+    };
+    login(mockUser);
     console.log("Login:", { email, password });
+
+    // Navigate based on role
+    navigate(`/${mockUser.role}/dashboard`);
   };
 
   return (

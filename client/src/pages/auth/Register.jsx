@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -9,11 +10,21 @@ const Register = () => {
     role: "freelancer",
   });
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add register logic here
+    // Frontend-only registration (no backend API)
+    const userData = {
+      name: formData.name,
+      email: formData.email,
+      role: formData.role,
+    };
+    login(userData);
     console.log("Register:", formData);
+
+    // Navigate based on role
+    navigate(`/${formData.role}/dashboard`);
   };
 
   const handleChange = (e) => {

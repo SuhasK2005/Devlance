@@ -1,31 +1,22 @@
-# Devlance - Freelancing Platform
+# Devlance - Freelancing Platform (Frontend Only)
 
-A full-stack freelancing platform built with React (frontend) and Node.js/Express (backend).
+A freelancing platform frontend built with React and Tailwind CSS. This is a client-side only application with mock authentication and data management.
 
 ## Project Structure
 
 ```
 devlance/
-├── client/                 # Frontend (React + Vite)
-│   ├── src/
-│   │   ├── components/     # Reusable UI components
-│   │   ├── pages/          # Page components
-│   │   │   ├── auth/       # Authentication pages
-│   │   │   ├── client/     # Client dashboard pages
-│   │   │   ├── freelancer/ # Freelancer dashboard pages
-│   │   │   └── admin/      # Admin dashboard pages
-│   │   ├── context/        # React Context for global state
-│   │   ├── services/       # API service calls
-│   │   └── utils/          # Utility functions
-│   └── public/
-│
-└── server/                 # Backend (Node.js + Express)
-    ├── config/             # Configuration files
-    ├── models/             # MongoDB models
-    ├── controllers/        # Request handlers
-    ├── routes/             # API routes
-    ├── middleware/         # Custom middleware
-    └── utils/              # Utility functions
+└── client/                 # Frontend (React + Vite)
+    ├── src/
+    │   ├── components/     # Reusable UI components
+    │   ├── pages/          # Page components
+    │   │   ├── auth/       # Authentication pages
+    │   │   ├── client/     # Client dashboard pages
+    │   │   ├── freelancer/ # Freelancer dashboard pages
+    │   │   └── admin/      # Admin dashboard pages
+    │   ├── context/        # React Context for global state
+    │   └── utils/          # Utility functions
+    └── public/
 ```
 
 ## Features
@@ -35,7 +26,7 @@ devlance/
 - Post jobs
 - View proposals from freelancers
 - Manage active projects
-- Payment management
+- Dashboard overview
 
 ### Freelancer Features
 
@@ -53,29 +44,17 @@ devlance/
 
 ## Tech Stack
 
-### Frontend
-
 - React 18
 - React Router DOM
-- Axios
 - Tailwind CSS
 - Vite
-
-### Backend
-
-- Node.js
-- Express.js
-- MongoDB
-- Mongoose
-- JWT Authentication
-- bcryptjs
+- LocalStorage for state persistence
 
 ## Getting Started
 
 ### Prerequisites
 
 - Node.js (v14 or higher)
-- MongoDB
 - npm or yarn
 
 ### Installation
@@ -87,95 +66,46 @@ git clone <repository-url>
 cd devlance
 ```
 
-2. Install server dependencies
+2. Install client dependencies
 
 ```bash
-cd server
+cd client
 npm install
-```
-
-3. Install client dependencies
-
-```bash
-cd ../client
-npm install
-```
-
-4. Configure environment variables
-   Create a `.env` file in the root directory:
-
-```
-NODE_ENV=development
-PORT=5000
-MONGO_URI=mongodb://localhost:27017/devlance
-JWT_SECRET=your_jwt_secret_key
-CLIENT_URL=http://localhost:5173
 ```
 
 ### Running the Application
 
-1. Start MongoDB
-
-```bash
-mongod
-```
-
-2. Start the server (from server directory)
-
-```bash
-cd server
-npm run dev
-```
-
-3. Start the client (from client directory)
+Start the development server:
 
 ```bash
 cd client
 npm run dev
 ```
 
-The client will run on `http://localhost:5173` and the server on `http://localhost:5000`.
+The application will run on `http://localhost:5173`.
 
-## API Endpoints
+## Authentication
 
-### Authentication
+This is a frontend-only application with mock authentication. When you log in or register:
 
-- POST `/api/auth/register` - Register new user
-- POST `/api/auth/login` - Login user
-- GET `/api/auth/me` - Get current user
-
-### Jobs
-
-- POST `/api/jobs` - Create new job (Client only)
-- GET `/api/jobs` - Get all jobs
-- GET `/api/jobs/:id` - Get job by ID
-- PUT `/api/jobs/:id` - Update job (Client only)
-- DELETE `/api/jobs/:id` - Delete job (Client only)
-
-### Proposals
-
-- POST `/api/proposals` - Submit proposal (Freelancer only)
-- GET `/api/proposals/my` - Get freelancer's proposals
-- GET `/api/proposals/job/:jobId` - Get proposals for a job
-
-### Projects
-
-- POST `/api/projects` - Create project
-- GET `/api/projects/my` - Get user's projects
-- GET `/api/projects/:id` - Get project by ID
-- PUT `/api/projects/:id` - Update project
-- DELETE `/api/projects/:id` - Delete project
-
-### Admin
-
-- GET `/api/admin/users` - Get all users (Admin only)
-- GET `/api/admin/stats` - Get dashboard statistics (Admin only)
+- User data is stored in browser's LocalStorage
+- No actual password validation is performed
+- You can select your role (Client/Freelancer) during registration
 
 ## User Roles
 
-- **Client**: Can post jobs and hire freelancers
+- **Client**: Can post jobs and manage projects
 - **Freelancer**: Can browse jobs and submit proposals
-- **Admin**: Full platform access and management
+- **Admin**: Platform management access
+
+## Development
+
+The application uses mock data and local state management. To add backend functionality:
+
+1. Set up your backend API
+2. Create service files in `src/services/` directory
+3. Update authentication logic in `src/context/AuthContext.jsx`
+4. Connect forms and data fetching to your API endpoints
 
 ## License
 
